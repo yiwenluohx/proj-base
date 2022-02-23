@@ -11,7 +11,5 @@ import com.study.base.core.base.RdfaObject;
  * <author>          <time>          <version>          <desc>
  * luohx            修改时间           1.0
  */
-public abstract class BasePo implements RdfaObject {
-    public BasePo() {
-    }
+public abstract class BasePo  implements RdfaObject {
 }

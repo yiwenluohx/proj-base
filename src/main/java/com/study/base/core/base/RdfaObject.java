@@ -12,5 +12,11 @@ import java.io.Serializable;
  * luohx            修改时间           1.0
  */
 public interface RdfaObject extends Serializable {
+
+    /**
+     * to be finalized by application develper according to actual requirement.
+     *
+     * @return String log
+     */
     String toLog();
 }

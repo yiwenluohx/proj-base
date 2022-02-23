@@ -2,24 +2,25 @@ package com.study.base.core.enums;
 
 /**
  * ClassName: ErrorType
- * Description:
+ * Description: 业务异常类型
  *
  * @Author: luohx
  * Date: 2022/2/22 上午11:18
  * History:
  * <author>          <time>          <version>          <desc>
- * luohx            修改时间           1.0
+ * luohx            修改时间           1.0             业务异常类型
  */
 public interface ErrorType {
+
     /**
-     * code码
+     * 错误码
      *
      * @return
      */
     String code();
 
     /**
-     * 消息
+     * 错误消息
      *
      * @return
      */

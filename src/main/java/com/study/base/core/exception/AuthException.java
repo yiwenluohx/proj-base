@@ -4,12 +4,12 @@ import com.study.base.core.enums.ErrorType;
 
 /**
  * ClassName: AuthException
- * Description:
+ * Description: 鉴权失败
  * @Author: luohx
  * Date: 2022/2/22 下午3:33
  * History:
  * <author>          <time>          <version>          <desc>
- * luohx            修改时间           1.0
+ * luohx            修改时间           1.0             鉴权失败
  */
 public class AuthException extends BusinessException {
     public AuthException(ErrorType type) {
@@ -20,6 +20,11 @@ public class AuthException extends BusinessException {
         super(type, cause);
     }
 
+    /**
+     * 默认异常
+     *
+     * @param message
+     */
     public AuthException(String message) {
         super("-1", message);
     }

@@ -21,6 +21,11 @@ public class ServiceException extends BusinessException {
         super(type, cause);
     }
 
+    /**
+     * 默认异常
+     *
+     * @param message
+     */
     public ServiceException(String message) {
         super("-1", message);
     }
