@@ -14,8 +14,12 @@ ${import}
 * Author: ${author}
 * Date: ${time}
 * History:
-* <author>          <time>          <version>          <desc>
-                * ${author}           ${time}           1.0              ${tableName} - ${className}
+*
+<author>
+    <time>
+        <version>
+            <desc>
+                * ${author}           ${time} 1.0 ${tableName} - ${className}
                 */
                 @Table(name = "${tableName}")
                 public class ${className} extends BasePo {
