@@ -8,6 +8,7 @@
         <module>framework-core</module>
         <module>lyw-mybatisGenerator</module>
         <module>lyw-test</module>
+        <module>framework-mybatis</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -52,14 +53,5 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
