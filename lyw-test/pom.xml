@@ -10,17 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>lyw-test</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.study</groupId>
+            <artifactId>framework-mybatis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!--数据库链接-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.10</version>
         </dependency>
     </dependencies>
 </project>

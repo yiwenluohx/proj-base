@@ -22,7 +22,14 @@
             <artifactId>spring-jdbc</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- 框架自动生成 -->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.4.0</version>
+        </dependency>
     </dependencies>
+
 
 
 </project>

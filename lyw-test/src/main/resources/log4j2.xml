@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" name="rdfa-Configuration">
+
+    <Properties>
+        <!--从环境变量中获取APP_ID,日志文件保存到指定位置-->
+        <Property name="LOG_PATH">/data/logs/${env:APP_ID:-undefinedappid}/${env:hostName}</Property>
+        <Property name="FILE_NAME">applog.log</Property>
+        <Property name="FILE_PATTERN">[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%level] [%thread] [%X{apm_traceId}] [%X{apm_traceSegmentId}] [%X{apm_spanId}] %logger{36} %L - %msg%xEx%n
+        </Property>
+    </Properties>
+
+    <ThresholdFilter level="DEBUG"/>
+    <Appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${FILE_PATTERN}"/>
+        </console>
+        <RollingFile name="RollingFile" fileName="${LOG_PATH}/${FILE_NAME}"
+                     filePattern="${LOG_PATH}/app-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="4" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="512MB"/>
+            </Policies>
+            <!--保存日志文件个数-->
+            <DefaultRolloverStrategy max="24"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <AsyncRoot level="${logging.level.root:-INFO}" includeLocation="true">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>
