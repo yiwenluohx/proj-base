@@ -11,6 +11,7 @@ import java.util.Map;
 /**
  * ClassName: ConvertUtils
  * Description: 类型转换工具类
+ *
  * @Author: luohx
  * Date: 2022/2/23 下午2:40
  * History:
@@ -44,6 +45,8 @@ public class ConvertUtils {
                 .put("boolean", "Boolean", "")
                 .put("float", "Float", "")
                 .put("double", "Double", "")
+                .put("longtext", "String", "")
+                .put("enum", "String", "")
                 .build();
     }
 
@@ -212,7 +215,7 @@ public class ConvertUtils {
     public static void main(String[] args) {
         System.out.println(convertColumnName2PropName("qr_code_id"));
         System.out.println(convertTableName2EntityName("sc_qr_Code"));
-        Map<String, String> row = jdbc2javaTypeTable.row("bigint  unsigned".replace("unsigned","").trim());
+        Map<String, String> row = jdbc2javaTypeTable.row("bigint  unsigned".replace("unsigned", "").trim());
         if (row.size() == 1) {
             row.forEach((k, v) -> {
                 log.info("key:{}", k);

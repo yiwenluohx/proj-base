@@ -1,6 +1,6 @@
 package ${package};
 
-import cn.quality.framework.mybatis.service.IBaseService;
+import service.IBaseService;
 import ${entityPackage};
 
 /**

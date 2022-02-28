@@ -85,7 +85,7 @@ public class CodeConfig {
      * eg：basePackage + child_package_po
      *    com.xxx.example.entity.po
      */
-    private String childPackagePo = "entity";
+    private String childPackagePo = "domain.entity";
     /**
      * service 接口 package
      */

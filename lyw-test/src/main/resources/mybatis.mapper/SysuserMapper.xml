@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.test.repository.SysuserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.test.domain.entity.Sysuser">
+                <id column="user_id" property="userId"/>
+                <result column="account" property="account"/>
+                <result column="mobile" property="mobile"/>
+                <result column="email" property="email"/>
+                <result column="is_enable" property="isEnable"/>
+    </resultMap>
+
+    <sql id="Table_Name">
+        sysuser
+    </sql>
+
+    <sql id="Base_Column">
+                user_id,
+                account,
+                mobile,
+                email,
+                is_enable
+    </sql>
+
+    <sql id="Base_Where">
+        <trim suffixOverrides="AND">
+                <if test="userId != null">
+                        user_id=#{userId}
+                        AND
+                </if>
+                <if test="account != null">
+                        account=#{account}
+                        AND
+                </if>
+                <if test="mobile != null">
+                        mobile=#{mobile}
+                        AND
+                </if>
+                <if test="email != null">
+                        email=#{email}
+                        AND
+                </if>
+                <if test="isEnable != null">
+                        is_enable=#{isEnable}
+                </if>
+        </trim>
+    </sql>
+
+    <sql id="Base_Select">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </sql>
+
+    <!-- 单条插入 -->
+    <insert id="insert" parameterType="com.study.test.domain.entity.Sysuser" useGeneratedKeys="true" keyProperty="userId">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    user_id,
+                </if>
+                <if test="account != null">
+                    account,
+                </if>
+                <if test="mobile != null">
+                    mobile,
+                </if>
+                <if test="email != null">
+                    email,
+                </if>
+                <if test="isEnable != null">
+                    is_enable,
+                </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    #{userId},
+                </if>
+                <if test="account != null">
+                    #{account},
+                </if>
+                <if test="mobile != null">
+                    #{mobile},
+                </if>
+                <if test="email != null">
+                    #{email},
+                </if>
+                <if test="isEnable != null">
+                    #{isEnable},
+                </if>
+        </trim>
+    </insert>
+
+    <!-- 批量插入 -->
+    <insert id="insertList" parameterType="java.util.List">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                user_id,
+                account,
+                mobile,
+                email,
+                is_enable,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.userId},
+                #{item.account},
+                #{item.mobile},
+                #{item.email},
+                #{item.isEnable},
+            </trim>
+        </foreach>
+    </insert>
+
+    <!-- 根据主键更新 -->
+    <update id="update" parameterType="com.study.test.domain.entity.Sysuser">
+        update
+        <include refid="Table_Name"/>
+        <set>
+                    <if test="account != null">
+                        account=#{account},
+                    </if>
+                    <if test="mobile != null">
+                        mobile=#{mobile},
+                    </if>
+                    <if test="email != null">
+                        email=#{email},
+                    </if>
+                    <if test="isEnable != null">
+                        is_enable=#{isEnable},
+                    </if>
+        </set>
+        where
+                user_id=#{userId}
+    </update>
+
+    <!-- 根据主键批量更新 -->
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                        <if test="item.account != null">
+                            account=#{item.account},
+                        </if>
+                        <if test="item.mobile != null">
+                            mobile=#{item.mobile},
+                        </if>
+                        <if test="item.email != null">
+                            email=#{item.email},
+                        </if>
+                        <if test="item.isEnable != null">
+                            is_enable=#{item.isEnable},
+                        </if>
+            </set>
+            where
+                    user_id=#{item.userId}
+        </foreach>
+    </update>
+
+    <!--
+  <delete id="delete" parameterType="com.study.test.domain.entity.Sysuser">
+      delete from
+      <include refid="Table_Name"/>
+      <where>
+          user_id=#{userId}
+      </where>
+  </delete>
+
+  <delete id="deleteList" parameterType="java.util.List">
+      delete from
+      <include refid="Table_Name"/>
+      where user_id in
+      <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+          #{item.userId}
+      </foreach>
+  </delete>
+  -->
+
+    <!-- 查询单表符合条件总条数 -->
+    <select id="count" parameterType="com.study.test.domain.entity.Sysuser" resultType="int">
+        select count(1) from
+        <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </select>
+
+    <!-- 查询符合条件的一条记录 -->
+    <select id="selectOne" parameterType="com.study.test.domain.entity.Sysuser" resultMap="BaseResultMap">
+        <include refid="Base_Select"/>
+        limit 1
+    </select>
+
+    <!-- 查询符合条件的记录 -->
+    <select id="selectList" parameterType="com.study.test.domain.entity.Sysuser" resultMap="BaseResultMap">
+        <include refid="Base_Select"/>
+    </select>
+
+    <select id="selectListByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        where user_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

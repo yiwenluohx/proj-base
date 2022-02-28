@@ -1,7 +1,7 @@
 package ${package};
 
 import ${entityPackage};
-import cn.quality.framework.mybatis.mapper.Mapper;
+import mapper.Mapper;
 
 /**
 * @Description: ${tableName}

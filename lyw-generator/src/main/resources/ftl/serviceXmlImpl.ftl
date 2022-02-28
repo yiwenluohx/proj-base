@@ -3,7 +3,7 @@ package ${package};
 import ${entityPackage};
 import ${mapperPackage};
 import ${servicePackage};
-import cn.quality.framework.mybatis.service.impl.BaseService;
+import service.impl.BaseService;
 import org.springframework.stereotype.Service;
 
 /**

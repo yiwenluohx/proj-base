@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.test.repository.TestMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.test.domain.entity.Test">
+                <id column="test_id" property="testId"/>
+                <result column="num" property="num"/>
+    </resultMap>
+
+    <sql id="Table_Name">
+        test
+    </sql>
+
+    <sql id="Base_Column">
+                test_id,
+                num
+    </sql>
+
+    <sql id="Base_Where">
+        <trim suffixOverrides="AND">
+                <if test="testId != null">
+                        test_id=#{testId}
+                        AND
+                </if>
+                <if test="num != null">
+                        num=#{num}
+                </if>
+        </trim>
+    </sql>
+
+    <sql id="Base_Select">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </sql>
+
+    <!-- 单条插入 -->
+    <insert id="insert" parameterType="com.study.test.domain.entity.Test" useGeneratedKeys="true" keyProperty="testId">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="testId != null">
+                    test_id,
+                </if>
+                <if test="num != null">
+                    num,
+                </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="testId != null">
+                    #{testId},
+                </if>
+                <if test="num != null">
+                    #{num},
+                </if>
+        </trim>
+    </insert>
+
+    <!-- 批量插入 -->
+    <insert id="insertList" parameterType="java.util.List">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                test_id,
+                num,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.testId},
+                #{item.num},
+            </trim>
+        </foreach>
+    </insert>
+
+    <!-- 根据主键更新 -->
+    <update id="update" parameterType="com.study.test.domain.entity.Test">
+        update
+        <include refid="Table_Name"/>
+        <set>
+                    <if test="num != null">
+                        num=#{num},
+                    </if>
+        </set>
+        where
+                test_id=#{testId}
+    </update>
+
+    <!-- 根据主键批量更新 -->
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                        <if test="item.num != null">
+                            num=#{item.num},
+                        </if>
+            </set>
+            where
+                    test_id=#{item.testId}
+        </foreach>
+    </update>
+
+    <!--
+  <delete id="delete" parameterType="com.study.test.domain.entity.Test">
+      delete from
+      <include refid="Table_Name"/>
+      <where>
+          test_id=#{testId}
+      </where>
+  </delete>
+
+  <delete id="deleteList" parameterType="java.util.List">
+      delete from
+      <include refid="Table_Name"/>
+      where test_id in
+      <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+          #{item.testId}
+      </foreach>
+  </delete>
+  -->
+
+    <!-- 查询单表符合条件总条数 -->
+    <select id="count" parameterType="com.study.test.domain.entity.Test" resultType="int">
+        select count(1) from
+        <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </select>
+
+    <!-- 查询符合条件的一条记录 -->
+    <select id="selectOne" parameterType="com.study.test.domain.entity.Test" resultMap="BaseResultMap">
+        <include refid="Base_Select"/>
+        limit 1
+    </select>
+
+    <!-- 查询符合条件的记录 -->
+    <select id="selectList" parameterType="com.study.test.domain.entity.Test" resultMap="BaseResultMap">
+        <include refid="Base_Select"/>
+    </select>
+
+    <select id="selectListByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        where test_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

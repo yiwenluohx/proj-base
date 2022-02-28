@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.test.repository.MessagesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.test.domain.entity.Messages">
+                <id column="msg_id" property="msgId"/>
+                <result column="from_id" property="fromId"/>
+                <result column="to_id" property="toId"/>
+                <result column="content" property="content"/>
+                <result column="is_read" property="isRead"/>
+    </resultMap>
+
+    <sql id="Table_Name">
+        messages
+    </sql>
+
+    <sql id="Base_Column">
+                msg_id,
+                from_id,
+                to_id,
+                content,
+                is_read
+    </sql>
+
+    <sql id="Base_Where">
+        <trim suffixOverrides="AND">
+                <if test="msgId != null">
+                        msg_id=#{msgId}
+                        AND
+                </if>
+                <if test="fromId != null">
+                        from_id=#{fromId}
+                        AND
+                </if>
+                <if test="toId != null">
+                        to_id=#{toId}
+                        AND
+                </if>
+                <if test="content != null">
+                        content=#{content}
+                        AND
+                </if>
+                <if test="isRead != null">
+                        is_read=#{isRead}
+                </if>
+        </trim>
+    </sql>
+
+    <sql id="Base_Select">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </sql>
+
+    <!-- 单条插入 -->
+    <insert id="insert" parameterType="com.study.test.domain.entity.Messages" useGeneratedKeys="true" keyProperty="msgId">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="msgId != null">
+                    msg_id,
+                </if>
+                <if test="fromId != null">
+                    from_id,
+                </if>
+                <if test="toId != null">
+                    to_id,
+                </if>
+                <if test="content != null">
+                    content,
+                </if>
+                <if test="isRead != null">
+                    is_read,
+                </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="msgId != null">
+                    #{msgId},
+                </if>
+                <if test="fromId != null">
+                    #{fromId},
+                </if>
+                <if test="toId != null">
+                    #{toId},
+                </if>
+                <if test="content != null">
+                    #{content},
+                </if>
+                <if test="isRead != null">
+                    #{isRead},
+                </if>
+        </trim>
+    </insert>
+
+    <!-- 批量插入 -->
+    <insert id="insertList" parameterType="java.util.List">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                msg_id,
+                from_id,
+                to_id,
+                content,
+                is_read,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.msgId},
+                #{item.fromId},
+                #{item.toId},
+                #{item.content},
+                #{item.isRead},
+            </trim>
+        </foreach>
+    </insert>
+
+    <!-- 根据主键更新 -->
+    <update id="update" parameterType="com.study.test.domain.entity.Messages">
+        update
+        <include refid="Table_Name"/>
+        <set>
+                    <if test="fromId != null">
+                        from_id=#{fromId},
+                    </if>
+                    <if test="toId != null">
+                        to_id=#{toId},
+                    </if>
+                    <if test="content != null">
+                        content=#{content},
+                    </if>
+                    <if test="isRead != null">
+                        is_read=#{isRead},
+                    </if>
+        </set>
+        where
+                msg_id=#{msgId}
+    </update>
+
+    <!-- 根据主键批量更新 -->
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                        <if test="item.fromId != null">
+                            from_id=#{item.fromId},
+                        </if>
+                        <if test="item.toId != null">
+                            to_id=#{item.toId},
+                        </if>
+                        <if test="item.content != null">
+                            content=#{item.content},
+                        </if>
+                        <if test="item.isRead != null">
+                            is_read=#{item.isRead},
+                        </if>
+            </set>
+            where
+                    msg_id=#{item.msgId}
+        </foreach>
+    </update>
+
+    <!--
+  <delete id="delete" parameterType="com.study.test.domain.entity.Messages">
+      delete from
+      <include refid="Table_Name"/>
+      <where>
+          msg_id=#{msgId}
+      </where>
+  </delete>
+
+  <delete id="deleteList" parameterType="java.util.List">
+      delete from
+      <include refid="Table_Name"/>
+      where msg_id in
+      <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+          #{item.msgId}
+      </foreach>
+  </delete>
+  -->
+
+    <!-- 查询单表符合条件总条数 -->
+    <select id="count" parameterType="com.study.test.domain.entity.Messages" resultType="int">
+        select count(1) from
+        <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </select>
+
+    <!-- 查询符合条件的一条记录 -->
+    <select id="selectOne" parameterType="com.study.test.domain.entity.Messages" resultMap="BaseResultMap">
+        <include refid="Base_Select"/>
+        limit 1
+    </select>
+
+    <!-- 查询符合条件的记录 -->
+    <select id="selectList" parameterType="com.study.test.domain.entity.Messages" resultMap="BaseResultMap">
+        <include refid="Base_Select"/>
+    </select>
+
+    <select id="selectListByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        where msg_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

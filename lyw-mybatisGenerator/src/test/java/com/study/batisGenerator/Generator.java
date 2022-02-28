@@ -21,10 +21,16 @@ public class Generator {
     private static DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://10.39.75.92:13306/quality?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true");
-        dataSource.setUsername("quality_dev");
-        dataSource.setPassword("quality_dev");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/eraser?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true");
+        dataSource.setUsername("root");
+        dataSource.setPassword("passw@rd");
         return dataSource;
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//        dataSource.setUrl("jdbc:mysql://10.39.75.92:13306/quality?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true");
+//        dataSource.setUsername("quality_dev");
+//        dataSource.setPassword("quality_dev");
+//        return dataSource;
     }
 
     /**
@@ -32,8 +38,8 @@ public class Generator {
      */
     public static void startTest() {
         CodeConfig config = new CodeConfig();
-        config.setBasePackage("cn.ygyg.quality.trace.core.domain")
-                .setProjectPath(System.getProperty("user.dir") + "/ygyg-quality-trace/ygyg-quality-trace-mybatisGenerator")
+        config.setBasePackage("com.study.test")
+                .setProjectPath(System.getProperty("user.dir") + "/proj-base/lyw-mybatisGenerator")
                 .setType(CodeConfig.TypeEnum.MAPPER);
         new CodeGenerator(getDataSource(), config)
                 .start();
@@ -74,11 +80,11 @@ public class Generator {
 
     public static void main(String[] args) {
         //生成所有表
-//        startTest();
+        startTest();
 
         //生成entity和xml文件
 //        xmlTest();
 //        生成指定的表
-        tableTest();
+//        tableTest();
     }
 }
