@@ -11,7 +11,7 @@ import service.impl.BaseService;
 * @author luohongxiao
 * @date 2022年02月28日
 */
-@Service("messagesService")
+@Service
 public class MessagesServiceImpl extends BaseService<Messages,MessagesMapper> implements MessagesService {
 
 }

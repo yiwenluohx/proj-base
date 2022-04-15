@@ -11,7 +11,7 @@ import service.impl.BaseService;
 * @author luohongxiao
 * @date 2022年02月28日
 */
-@Service("testService")
+@Service
 public class TestServiceImpl extends BaseService<Test,TestMapper> implements TestService {
 
 }
