@@ -1,6 +1,7 @@
 package com.study.test.service.impl;
 
 import com.study.core.exception.ServiceException;
+import com.study.test.convert.SysuserAppConverter;
 import com.study.test.domain.entity.Sysuser;
 import com.study.test.domain.entity.Test;
 import com.study.test.domain.param.UserParam;
@@ -30,15 +31,20 @@ public class SysuserServiceImpl extends BaseService<Sysuser, SysuserMapper> impl
     @Resource
     private TestMapper testMapper;
 
+    @Autowired
+    private SysuserAppConverter converter;
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void addUser(UserParam param) {
-        Sysuser user = new Sysuser();
-        user.setUserId(snowflakeHandler.nextId());
-        user.setAccount(param.getAccount());
-        user.setEmail(param.getEmail());
-        user.setMobile(param.getMobile());
-        user.setIsEnable(false);
+
+        Sysuser user = converter.toSysuser(param, snowflakeHandler.nextId());
+//        Sysuser user = new Sysuser();
+//        user.setUserId(snowflakeHandler.nextId());
+//        user.setAccount(param.getAccount());
+//        user.setEmail(param.getEmail());
+//        user.setMobile(param.getMobile());
+//        user.setIsEnable(false);
         this.getMapper().insert(user);
         this.insertNum(param.getNum());
     }

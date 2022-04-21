@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class SysUserController {
 
+
+
     @Autowired
     private SysuserServiceImpl userService;
 
@@ -37,6 +39,7 @@ public class SysUserController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public RdfaResult getInfo() {
+
         return Resp.ok("llll");
     }
 

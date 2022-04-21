@@ -10,7 +10,9 @@ spring:
 
 mybatis:
   mapper-locations: /mybatis.mapper/*.xml
-
+  #打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 
