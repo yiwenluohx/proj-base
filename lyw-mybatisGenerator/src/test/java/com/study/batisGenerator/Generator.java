@@ -19,18 +19,24 @@ import javax.sql.DataSource;
 public class Generator {
 
     private static DataSource getDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/eraser?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true");
-        dataSource.setUsername("root");
-        dataSource.setPassword("passw@rd");
-        return dataSource;
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//        dataSource.setUrl("jdbc:mysql://localhost:3306/eraser?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true");
+//        dataSource.setUsername("root");
+//        dataSource.setPassword("passw@rd");
+//        return dataSource;
 //        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 //        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 //        dataSource.setUrl("jdbc:mysql://10.39.75.92:13306/quality?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true");
 //        dataSource.setUsername("quality_dev");
 //        dataSource.setPassword("quality_dev");
 //        return dataSource;
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://10.39.75.92:13306/goods?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowMultiQueries=true");
+        dataSource.setUsername("goods_dev");
+        dataSource.setPassword("goods_dev");
+        return dataSource;
     }
 
     /**
@@ -66,13 +72,13 @@ public class Generator {
      */
     public static void tableTest() {
         CodeConfig config = new CodeConfig();
-        config.setBasePackage("cn.ygyg.quality.trace.support.domain")
+        config.setBasePackage("com.study.test")
                 .setTableNames(
                         Sets.newHashSet(
-                                "goods_raw_material_rela"
+                                "goods_sell_spec"
                         )
                 )
-                .setProjectPath(System.getProperty("user.dir") + "/ygyg-quality-trace/ygyg-quality-trace-mybatisGenerator")
+                .setProjectPath(System.getProperty("user.dir") + "/proj-base/lyw-mybatisGenerator")
                 .setType(CodeConfig.TypeEnum.MAPPER);
         new CodeGenerator(getDataSource(), config)
                 .start();

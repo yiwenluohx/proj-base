@@ -2,6 +2,7 @@ package com.study.test.controller;
 
 import com.study.core.ro.RdfaResult;
 import com.study.core.ro.Resp;
+import com.study.test.config.Authorize;
 import com.study.test.domain.param.UserParam;
 import com.study.test.service.impl.SysuserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class SysUserController {
 
-
-
     @Autowired
     private SysuserServiceImpl userService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @Authorize(type = Authorize.Type.OWNER, eid = "#eid")
     public RdfaResult insert(@Validated @RequestBody UserParam param) {
         userService.addUser(param);
         return Resp.ok();
