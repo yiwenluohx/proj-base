@@ -14,6 +14,7 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -127,6 +128,7 @@ public class AbstractAuthInterceptorAdapter extends HandlerInterceptorAdapter {
      * @param annotation
      * @return
      */
+
     public Long getEid(HttpServletRequest request, Authorize annotation) {
         //优先使用eid表达式
         if (StringUtils.isNotBlank(annotation.eidExpress())) {
