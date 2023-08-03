@@ -1,6 +1,7 @@
 package com.study.test;
 
 import ch.qos.logback.core.net.ssl.SSLNestedComponentRegistryRules;
+import com.study.core.utils.AESUtils;
 import com.study.snowflake.SnowflakeAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -28,6 +29,10 @@ public class TestApplicationRunner implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(TestApplicationRunner.class);
 
     public static void main(String[] args) {
+        String aesKey = "softness12345678";
+        String enStr = AESUtils.encrypt(aesKey.getBytes(), "lhx_123");
+        String decStr = AESUtils.decrypt(aesKey.getBytes(), enStr);
+
         SpringApplication.run(TestApplicationRunner.class, args);
     }
 
