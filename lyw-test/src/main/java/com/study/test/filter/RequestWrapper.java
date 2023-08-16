@@ -1,4 +1,4 @@
-package com.study.test.config;
+package com.study.test.filter;
 
 import com.study.core.exception.ServiceException;
 import org.slf4j.Logger;
