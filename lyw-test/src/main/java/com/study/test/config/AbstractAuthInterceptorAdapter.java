@@ -150,8 +150,6 @@ public class AbstractAuthInterceptorAdapter extends HandlerInterceptorAdapter {
      *
      * @param request
      * @param spEl
-     * @return
-     * @author J·K
      * @since: 2021/11/30 9:10 下午
      * @version 1.0
      */
@@ -167,7 +165,6 @@ public class AbstractAuthInterceptorAdapter extends HandlerInterceptorAdapter {
      *
      * @param request
      * @return
-     * @author J·K
      * @since: 2021/11/30 11:44 下午
      * @version 1.0
      */
@@ -191,7 +188,6 @@ public class AbstractAuthInterceptorAdapter extends HandlerInterceptorAdapter {
      *
      * @param request
      * @param context
-     * @author J·K
      * @since: 2021/11/30 8:53 下午
      * @version 1.0
      */

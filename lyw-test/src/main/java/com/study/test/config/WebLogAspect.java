@@ -101,6 +101,7 @@ public class WebLogAspect {
         if (METHOD_SET.contains(method)) {
             log.info("【" + request.getMethod() + "Params】:" + getRequestParam(joinPoint, request));
         }
+        //打印拦截的方法全路径
         log.info("【classMethod】:" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
     }
 
